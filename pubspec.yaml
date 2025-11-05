@@ -106,6 +106,30 @@ flutter:
     - assets/images/history_select@2x.png
     - assets/images/me_normal@2x.png
     - assets/images/me_select@2x.png
+    - assets/images/登录_电话@2x.png
+    - assets/images/登录_密码@2x.png
+    - assets/images/登录_人物@2x.png
+    - assets/images/历史_删除@2x.png
+    - assets/images/选择框-未选中@2x.png
+    - assets/images/选择框-选中@2x.png
+    - assets/images/重置密码_打勾@2x.png
+    - assets/images/重置密码_未打勾@2x.png
+    - assets/images/collection_detail@2x.png
+    - assets/images/detail_collection@2x.png
+    - assets/images/history_collection_normal@2x.png
+    - assets/images/history_collection_select@2x.png
+    - assets/images/logo.png
+    - assets/images/me_arrow@2x.png
+    - assets/images/me_cache@2x.png
+    - assets/images/me_collection@2x.png
+    - assets/images/me_help@2x.png
+    - assets/images/me_history@2x.png
+    - assets/images/me_interestRate@2x.png
+    - assets/images/me_knowledge@2x.png
+    - assets/images/me_our@2x.png
+    - assets/images/me_policy@2x.png
+    - assets/images/nav_back@2x.png
+    - assets/images/search_history@2x.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
