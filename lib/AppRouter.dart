@@ -6,10 +6,10 @@ import 'package:flutterdemols/TabbarItemView.dart';
 //tabbar页面
 import 'package:flutterdemols/CalculatorPage.dart';
 import 'package:flutterdemols/CollectPage.dart';
-import 'package:flutterdemols/HistoryPage.dart';
-import 'package:flutterdemols/MePage.dart';
+import 'package:flutterdemols/HistoryPage/HistoryPage.dart';
+import 'package:flutterdemols/MePage/MePage.dart';
 //普通页面
-import 'package:flutterdemols/CalculatorDetail.dart';
+import 'package:flutterdemols/CalculatorDetailPage.dart';
 
 
 //定义导航 Key（路由上下文）
@@ -67,7 +67,7 @@ final GoRouter router = GoRouter(
       GoRoute(
         parentNavigatorKey: _normalNavigatorKey,
         path: '/calculatorDetail',
-        builder: (context, state) => CalculatorDetail(),
+        builder: (context, state) => CalculatorDetailPage(),
       )
     ]
 );

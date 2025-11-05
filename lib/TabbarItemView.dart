@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterdemols/Base/Extension/AppColor.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutterdemols/Base/Base.dart';
+import 'package:flutterdemols/Base/Extension/ColorApp.dart';
 
 class TabbarItemView extends StatelessWidget {
   const TabbarItemView(this.navigationShell, {super.key});
@@ -17,7 +16,7 @@ class TabbarItemView extends StatelessWidget {
         currentIndex: navigationShell.currentIndex,
         type: BottomNavigationBarType.fixed,
         // 设置选中项的颜色
-        selectedItemColor: AppColor.theme, // 使用蓝色作为选中颜色
+        selectedItemColor: ColorApp.theme, // 使用蓝色作为选中颜色
         // 设置未选中项的颜色
         unselectedItemColor: Colors.grey, // 未选中项的颜色
         selectedLabelStyle: const TextStyle(

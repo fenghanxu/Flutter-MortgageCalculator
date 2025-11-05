@@ -40,7 +40,7 @@ class ColorHex {
 }
 
 /// 应用颜色表（等价于 OC 的 Color 类）
-class AppColor {
+class ColorApp {
   /// 随机颜色
   static Color get random {
     final random = Random();
