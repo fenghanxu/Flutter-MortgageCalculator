@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最新房贷利率 - 智能贷款计算器</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3CB371;
+            --min-color: #7FFFAA;
+            --secondary-color: #3CB371;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.7;
+            background-color: #f8f9fa;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--min-color));
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .app-icon i {
+            font-size: 36px;
+            color: var(--secondary-color);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .rate-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .rate-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .rate-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .rate-icon i {
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+        
+        .rate-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+            margin: 10px 0;
+        }
+        
+        .rate-change {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .rate-up {
+            background-color: rgba(231, 76, 60, 0.1);
+            color: var(--accent-color);
+        }
+        
+        .rate-down {
+            background-color: rgba(46, 204, 113, 0.1);
+            color: var(--success-color);
+        }
+        
+        .rate-stable {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--secondary-color);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .info-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .calculator-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--min-color));
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .sticky-sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .bank-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .bank-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .bank-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .bank-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .trend-chart {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .chart-placeholder {
+            height: 300px;
+            background: linear-gradient(135deg, #f8f9fa, #7FFFAA);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            margin: 20px 0;
+        }
+        
+        .update-time {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .city-selector {
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 1.5rem 0;
+            }
+            
+            .app-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .app-icon i {
+                font-size: 28px;
+            }
+            
+            .rate-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <div class="app-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <h1 class="display-5 fw-bold">最新房贷利率</h1>
+                    <p class="lead">智能贷款计算器 - 实时利率查询与比较</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <!-- 侧边导航 -->
+            <div class="col-lg-3 mb-4">
+                <div class="sticky-sidebar">
+                    <div class="rate-card">
+                        <h5 class="mb-3">利率导航</h5>
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-overview-tab" data-bs-toggle="pill" href="#v-pills-overview" role="tab" aria-controls="v-pills-overview" aria-selected="true">
+                                <i class="fas fa-chart-line me-2"></i>利率概览
+                            </a>
+                            <a class="nav-link" id="v-pills-lpr-tab" data-bs-toggle="pill" href="#v-pills-lpr" role="tab" aria-controls="v-pills-lpr" aria-selected="false">
+                                <i class="fas fa-exchange-alt me-2"></i>LPR利率
+                            </a>
+                            <a class="nav-link" id="v-pills-banks-tab" data-bs-toggle="pill" href="#v-pills-banks" role="tab" aria-controls="v-pills-banks" aria-selected="false">
+                                <i class="fas fa-university me-2"></i>银行利率
+                            </a>
+                            <a class="nav-link" id="v-pills-cities-tab" data-bs-toggle="pill" href="#v-pills-cities" role="tab" aria-controls="v-pills-cities" aria-selected="false">
+                                <i class="fas fa-city me-2"></i>城市利率
+                            </a>
+                            <a class="nav-link" id="v-pills-trends-tab" data-bs-toggle="pill" href="#v-pills-trends" role="tab" aria-controls="v-pills-trends" aria-selected="false">
+                                <i class="fas fa-chart-bar me-2"></i>利率趋势
+                            </a>
+                            <a class="nav-link" id="v-pills-calculator-tab" data-bs-toggle="pill" href="#v-pills-calculator" role="tab" aria-controls="v-pills-calculator" aria-selected="false">
+                                <i class="fas fa-calculator me-2"></i>利率计算
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-box">
+                        <h5>利率计算器</h5>
+                        <p>根据最新利率计算您的月供</p>
+                        <button class="btn btn-light mt-2" onclick="openCalculator()">
+                            <i class="fas fa-calculator me-1"></i> 立即计算
+                        </button>
+                    </div>
+                    
+                    <div class="rate-card mt-4">
+                        <h6>最后更新</h6>
+                        <p class="mb-1" id="update-time">2023年10月15日 09:30</p>
+                        <span class="badge bg-success">最新数据</span>
+                        
+                        <h6 class="mt-3">下次更新</h6>
+                        <p>2023年11月20日</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="col-lg-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <!-- 利率概览 -->
+                    <div class="tab-pane fade show active" id="v-pills-overview" role="tabpanel" aria-labelledby="v-pills-overview-tab">
+                        <h2 class="section-title">房贷利率概览</h2>
+                        
+                        <div class="update-time">
+                            <i class="fas fa-sync-alt me-1"></i> 最后更新: 2023年10月15日 09:30
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card text-center">
+                                    <div class="rate-icon mx-auto">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <h4>首套房利率</h4>
+                                    <div class="rate-value">4.10%</div>
+                                    <span class="rate-change rate-down">-0.10%</span>
+                                    <p>较上月下降0.10个百分点</p>
+                                    <div class="mt-3">
+                                        <small class="text-muted">LPR(4.20%) - 10BP</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card text-center">
+                                    <div class="rate-icon mx-auto">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                    <h4>二套房利率</h4>
+                                    <div class="rate-value">4.90%</div>
+                                    <span class="rate-change rate-stable">持平</span>
+                                    <p>与上月持平</p>
+                                    <div class="mt-3">
+                                        <small class="text-muted">LPR(4.20%) + 70BP</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card text-center">
+                                    <div class="rate-icon mx-auto">
+                                        <i class="fas fa-hand-holding-usd"></i>
+                                    </div>
+                                    <h4>公积金利率</h4>
+                                    <div class="rate-value">3.10%</div>
+                                    <span class="rate-change rate-stable">持平</span>
+                                    <p>五年期以上贷款利率</p>
+                                    <div class="mt-3">
+                                        <small class="text-muted">五年以下: 2.75%</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card text-center">
+                                    <div class="rate-icon mx-auto">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h4>LPR基准</h4>
+                                    <div class="rate-value">4.20%</div>
+                                    <span class="rate-change rate-stable">持平</span>
+                                    <p>5年期以上LPR</p>
+                                    <div class="mt-3">
+                                        <small class="text-muted">1年期LPR: 3.45%</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h5><i class="fas fa-info-circle me-2"></i>当前利率特点</h5>
+                            <p>当前房贷利率处于历史较低水平，首套房利率已连续三个月下调，为购房者提供了较好的贷款窗口期。多家银行推出利率优惠活动，部分优质客户可享受更低利率。</p>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h5><i class="fas fa-exclamation-triangle me-2"></i>重要提醒</h5>
+                            <p>实际贷款利率因个人信用状况、贷款银行、地区政策等因素而异。本页面显示的是全国平均利率水平，具体利率请以银行最终审批为准。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- LPR利率 -->
+                    <div class="tab-pane fade" id="v-pills-lpr" role="tabpanel" aria-labelledby="v-pills-lpr-tab">
+                        <h2 class="section-title">LPR贷款利率</h2>
+                        
+                        <div class="update-time">
+                            <i class="fas fa-sync-alt me-1"></i> 最后更新: 2023年10月15日 09:30
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card text-center">
+                                    <h4>5年期以上LPR</h4>
+                                    <div class="rate-value">4.20%</div>
+                                    <span class="rate-change rate-stable">持平</span>
+                                    <p>自2023年8月以来保持稳定</p>
+                                    <div class="mt-3">
+                                        <small class="text-muted">主要影响房贷利率</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card text-center">
+                                    <h4>1年期LPR</h4>
+                                    <div class="rate-value">3.45%</div>
+                                    <span class="rate-change rate-down">-0.10%</span>
+                                    <p>较上月下降0.10个百分点</p>
+                                    <div class="mt-3">
+                                        <small class="text-muted">主要影响短期贷款</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="trend-chart">
+                            <h4>LPR历史走势</h4>
+                            <p>近一年LPR变化情况（单位：%）</p>
+                            <div class="chart-placeholder">
+                                <div class="text-center">
+                                    <i class="fas fa-chart-line fa-3x mb-3"></i>
+                                    <p>LPR走势图表加载中...</p>
+                                    <small>5年期LPR: 4.20% | 1年期LPR: 3.45%</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h5><i class="fas fa-question-circle me-2"></i>什么是LPR？</h5>
+                            <p>LPR（贷款市场报价利率）是由各报价行根据本行对最优质客户的贷款利率，以公开市场操作利率加点形成的方式报价，由中国人民银行授权全国银行间同业拆借中心计算并公布的基础性的贷款参考利率。目前，LPR已成为银行贷款利率定价的主要参考基准。</p>
+                        </div>
+                        
+                        <h4>LPR调整历史</h4>
+                        <table class="bank-table">
+                            <thead>
+                                <tr>
+                                    <th>调整时间</th>
+                                    <th>5年期LPR</th>
+                                    <th>1年期LPR</th>
+                                    <th>变动幅度</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2023年10月</td>
+                                    <td>4.20%</td>
+                                    <td>3.45%</td>
+                                    <td><span class="rate-change rate-stable">持平</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2023年8月</td>
+                                    <td>4.20%</td>
+                                    <td>3.45%</td>
+                                    <td><span class="rate-change rate-down">1年期-0.10%</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2023年6月</td>
+                                    <td>4.20%</td>
+                                    <td>3.55%</td>
+                                    <td><span class="rate-change rate-down">双双下调</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2023年3月</td>
+                                    <td>4.30%</td>
+                                    <td>3.65%</td>
+                                    <td><span class="rate-change rate-stable">持平</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2023年1月</td>
+                                    <td>4.30%</td>
+                                    <td>3.65%</td>
+                                    <td><span class="rate-change rate-stable">持平</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2022年12月</td>
+                                    <td>4.30%</td>
+                                    <td>3.65%</td>
+                                    <td><span class="rate-change rate-stable">持平</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 银行利率 -->
+                    <div class="tab-pane fade" id="v-pills-banks" role="tabpanel" aria-labelledby="v-pills-banks-tab">
+                        <h2 class="section-title">各大银行房贷利率</h2>
+                        
+                        <div class="update-time">
+                            <i class="fas fa-sync-alt me-1"></i> 最后更新: 2023年10月15日 09:30
+                        </div>
+                        
+                        <div class="city-selector">
+                            <label for="city-select" class="form-label">选择城市:</label>
+                            <select class="form-select" id="city-select" style="max-width: 200px;">
+                                <option selected>全国平均</option>
+                                <option>北京</option>
+                                <option>上海</option>
+                                <option>广州</option>
+                                <option>深圳</option>
+                                <option>杭州</option>
+                                <option>南京</option>
+                                <option>成都</option>
+                                <option>武汉</option>
+                            </select>
+                        </div>
+                        
+                        <h4>首套房贷款利率</h4>
+                        <table class="bank-table">
+                            <thead>
+                                <tr>
+                                    <th>银行名称</th>
+                                    <th>利率</th>
+                                    <th>基点(BP)</th>
+                                    <th>最低首付</th>
+                                    <th>状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>工商银行</td>
+                                    <td>4.10%</td>
+                                    <td>-10</td>
+                                    <td>20%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>建设银行</td>
+                                    <td>4.10%</td>
+                                    <td>-10</td>
+                                    <td>20%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>农业银行</td>
+                                    <td>4.15%</td>
+                                    <td>-5</td>
+                                    <td>20%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>中国银行</td>
+                                    <td>4.10%</td>
+                                    <td>-10</td>
+                                    <td>20%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>招商银行</td>
+                                    <td>4.05%</td>
+                                    <td>-15</td>
+                                    <td>25%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>交通银行</td>
+                                    <td>4.10%</td>
+                                    <td>-10</td>
+                                    <td>20%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>邮政储蓄</td>
+                                    <td>4.15%</td>
+                                    <td>-5</td>
+                                    <td>20%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>中信银行</td>
+                                    <td>4.05%</td>
+                                    <td>-15</td>
+                                    <td>25%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <h4 class="mt-5">二套房贷款利率</h4>
+                        <table class="bank-table">
+                            <thead>
+                                <tr>
+                                    <th>银行名称</th>
+                                    <th>利率</th>
+                                    <th>基点(BP)</th>
+                                    <th>最低首付</th>
+                                    <th>状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>工商银行</td>
+                                    <td>4.90%</td>
+                                    <td>+70</td>
+                                    <td>40%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>建设银行</td>
+                                    <td>4.90%</td>
+                                    <td>+70</td>
+                                    <td>40%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>农业银行</td>
+                                    <td>4.95%</td>
+                                    <td>+75</td>
+                                    <td>40%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>中国银行</td>
+                                    <td>4.90%</td>
+                                    <td>+70</td>
+                                    <td>40%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>招商银行</td>
+                                    <td>4.85%</td>
+                                    <td>+65</td>
+                                    <td>50%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                                <tr>
+                                    <td>交通银行</td>
+                                    <td>4.90%</td>
+                                    <td>+70</td>
+                                    <td>40%</td>
+                                    <td><span class="badge bg-success">可申请</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="info-box mt-4">
+                            <h5><i class="fas fa-lightbulb me-2"></i>选择银行建议</h5>
+                            <p>不同银行的房贷利率和审批条件有所不同。建议您根据自身情况选择：</p>
+                            <ul>
+                                <li><strong>工资代发银行：</strong>通常可享受更优惠的利率</li>
+                                <li><strong>有业务往来的银行：</strong>审批流程可能更顺畅</li>
+                                <li><strong>地方性银行：</strong>有时会提供更具竞争力的利率</li>
+                                <li><strong>大型国有银行：</strong>利率相对稳定，服务网络广泛</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 城市利率 -->
+                    <div class="tab-pane fade" id="v-pills-cities" role="tabpanel" aria-labelledby="v-pills-cities-tab">
+                        <h2 class="section-title">主要城市房贷利率</h2>
+                        
+                        <div class="update-time">
+                            <i class="fas fa-sync-alt me-1"></i> 最后更新: 2023年10月15日 09:30
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card">
+                                    <h4>北京</h4>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.05%</div>
+                                                <small class="text-muted">首套房</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.85%</div>
+                                                <small class="text-muted">二套房</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3"><small>首付比例: 首套35% 二套60%</small></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card">
+                                    <h4>上海</h4>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.10%</div>
+                                                <small class="text-muted">首套房</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.90%</div>
+                                                <small class="text-muted">二套房</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3"><small>首付比例: 首套35% 二套50%</small></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card">
+                                    <h4>广州</h4>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.20%</div>
+                                                <small class="text-muted">首套房</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.80%</div>
+                                                <small class="text-muted">二套房</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3"><small>首付比例: 首套30% 二套50%</small></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="rate-card">
+                                    <h4>深圳</h4>
+                                    <div class="row mt-3">
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.15%</div>
+                                                <small class="text-muted">首套房</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-center">
+                                                <div class="rate-value">4.75%</div>
+                                                <small class="text-muted">二套房</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="mt-3"><small>首付比例: 首套30% 二套70%</small></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h5><i class="fas fa-map-marker-alt me-2"></i>城市政策差异</h5>
+                            <p>不同城市的房贷政策和利率存在差异，主要受以下因素影响：</p>
+                            <ul>
+                                <li><strong>房地产市场热度：</strong>热点城市通常有更严格的调控政策</li>
+                                <li><strong>地方政府政策：</strong>各地根据实际情况制定差异化政策</li>
+                                <li><strong>银行竞争程度：</strong>银行竞争激烈的城市利率可能更低</li>
+                                <li><strong>人口流入情况：</strong>人口净流入城市需求更旺盛</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- 利率趋势 -->
+                    <div class="tab-pane fade" id="v-pills-trends" role="tabpanel" aria-labelledby="v-pills-trends-tab">
+                        <h2 class="section-title">房贷利率趋势分析</h2>
+                        
+                        <div class="trend-chart">
+                            <h4>近一年房贷利率走势</h4>
+                            <p>首套房与二套房平均利率变化（单位：%）</p>
+                            <div class="chart-placeholder">
+                                <div class="text-center">
+                                    <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                                    <p>利率走势图表加载中...</p>
+                                    <small>数据来源: 全国银行间同业拆借中心</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="rate-card">
+                                    <h4>未来利率预测</h4>
+                                    <p>基于当前经济形势和政策导向，我们对未来房贷利率做出以下预测：</p>
+                                    <ul>
+                                        <li><strong>短期（3个月内）：</strong>保持稳定或小幅下调</li>
+                                        <li><strong>中期（6-12个月）：</strong>可能继续下行趋势</li>
+                                        <li><strong>长期（1年以上）：</strong>受经济复苏影响可能回升</li>
+                                    </ul>
+                                    <div class="mt-3">
+                                        <small class="text-muted">预测仅供参考，实际以央行政策为准</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="rate-card">
+                                    <h4>影响因素分析</h4>
+                                    <p>影响房贷利率的主要因素：</p>
+                                    <ul>
+                                        <li><strong>货币政策：</strong>央行降准降息直接影响</li>
+                                        <li><strong>房地产市场：</strong>市场热度影响信贷政策</li>
+                                        <li><strong>经济形势：</strong>GDP增长、通胀水平等</li>
+                                        <li><strong>国际环境：</strong>全球利率变化有传导效应</li>
+                                        <li><strong>银行资金成本：</strong>影响银行定价能力</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 利率计算 -->
+                    <div class="tab-pane fade" id="v-pills-calculator" role="tabpanel" aria-labelledby="v-pills-calculator-tab">
+                        <h2 class="section-title">房贷利率计算器</h2>
+                        
+                        <div class="calculator-box">
+                            <h4>根据最新利率计算月供</h4>
+                            <p>输入您的贷款信息，查看不同利率下的月供变化</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">贷款金额（万元）</label>
+                                        <input type="number" class="form-control" id="loan-amount" placeholder="例如：100" value="100">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">贷款年限</label>
+                                        <select class="form-select" id="loan-term">
+                                            <option value="10">10年</option>
+                                            <option value="20" selected>20年</option>
+                                            <option value="30">30年</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">贷款利率</label>
+                                        <select class="form-select" id="loan-rate">
+                                            <option value="4.10" selected>首套房 4.10%</option>
+                                            <option value="4.90">二套房 4.90%</option>
+                                            <option value="3.10">公积金 3.10%</option>
+                                            <option value="4.20">LPR基准 4.20%</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">还款方式</label>
+                                        <select class="form-select" id="repay-method">
+                                            <option value="equal" selected>等额本息</option>
+                                            <option value="principal">等额本金</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-light w-100 mt-3" onclick="calculatePayment()">
+                                <i class="fas fa-calculator me-1"></i> 计算月供
+                            </button>
+                            
+                            <div id="calculation-result" class="mt-4" style="display: none;">
+                                <h4>计算结果</h4>
+                                <div class="row text-center">
+                                    <div class="col-4">
+                                        <div class="rate-value" id="monthly-payment">0</div>
+                                        <small class="text-muted">月供(元)</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="rate-value" id="total-interest">0</div>
+                                        <small class="text-muted">总利息(元)</small>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="rate-value" id="total-payment">0</div>
+                                        <small class="text-muted">总还款(元)</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box mt-4">
+                            <h5><i class="fas fa-calculator me-2"></i>计算说明</h5>
+                            <p>本计算器基于等额本息还款方式计算，结果仅供参考。实际月供可能因银行政策、个人信用状况等因素有所不同。</p>
+                            <p><strong>等额本息：</strong>每月还款额固定，前期利息占比高，后期本金占比高。</p>
+                            <p><strong>等额本金：</strong>每月还款本金固定，利息逐月递减，前期还款压力较大。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>智能贷款计算器</h5>
+                    <p>专业的金融工具，助您轻松规划财务未来</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 智能贷款计算器 版权所有</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-white me-3">房贷利率</a>
+                        <a href="#" class="text-white me-3">贷款计算</a>
+                        <a href="#" class="text-white">购房指南</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 更新当前时间
+        function updateTime() {
+            const now = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('update-time').textContent = now.toLocaleDateString('zh-CN', options);
+        }
+        
+        // 初始化时间
+        updateTime();
+        
+        // 打开计算器
+        function openCalculator() {
+            document.getElementById('v-pills-calculator-tab').click();
+        }
+        
+        // 计算月供
+        function calculatePayment() {
+            const amount = parseFloat(document.getElementById('loan-amount').value) * 10000;
+            const term = parseInt(document.getElementById('loan-term').value);
+            const rate = parseFloat(document.getElementById('loan-rate').value) / 100 / 12;
+            const method = document.getElementById('repay-method').value;
+            
+            if (!amount || amount <= 0) {
+                alert('请输入有效的贷款金额');
+                return;
+            }
+            
+            let monthlyPayment, totalInterest, totalPayment;
+            const months = term * 12;
+            
+            if (method === 'equal') {
+                // 等额本息计算
+                monthlyPayment = amount * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+                totalPayment = monthlyPayment * months;
+                totalInterest = totalPayment - amount;
+            } else {
+                // 等额本金计算（简化，只计算首月）
+                const monthlyPrincipal = amount / months;
+                monthlyPayment = monthlyPrincipal + (amount * rate);
+                totalInterest = (amount * rate * (months + 1)) / 2;
+                totalPayment = amount + totalInterest;
+            }
+            
+            // 显示结果
+            document.getElementById('monthly-payment').textContent = Math.round(monthlyPayment).toLocaleString();
+            document.getElementById('total-interest').textContent = Math.round(totalInterest).toLocaleString();
+            document.getElementById('total-payment').textContent = Math.round(totalPayment).toLocaleString();
+            document.getElementById('calculation-result').style.display = 'block';
+        }
+        
+        // 初始化计算器
+        document.addEventListener('DOMContentLoaded', function() {
+            // 默认计算一次
+            calculatePayment();
+        });
+    </script>
+</body>
+</html>

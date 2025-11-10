@@ -71,6 +71,8 @@ dependencies:
   device_info_plus: ^11.0.0
   #  用于 Encryp封装。加密算法
   crypto: ^3.0.3
+  #  用于加载网页
+#  flutter_inappwebview: ^6.1.5
 
 dev_dependencies:
   flutter_test:
@@ -98,6 +100,12 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/html/帮助中心.html
+    - assets/html/房贷知识.html
+    - assets/html/关于我们.html
+    - assets/html/隐私政策.html
+    - assets/html/用户服务协议.html
+    - assets/html/最新利率.html
     - assets/images/calculator_normal@2x.png
     - assets/images/calculator_select@2x.png
     - assets/images/collect_normal@2x.png

@@ -1,7 +1,7 @@
-// me_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutterdemols/Base/Extension/ColorApp.dart';
 import 'package:flutterdemols/MePage/MeButton.dart';
+import 'package:flutterdemols/WebPage.dart';
 
 class MePage extends StatefulWidget {
   const MePage({Key? key}) : super(key: key);
@@ -70,9 +70,10 @@ class _MePageState extends State<MePage> {
   void _navigateToCollection() {
     // 跳转到收藏页面或切换tab
     // 这里需要根据您的实际导航结构来实现
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('跳转到收藏记录')),
-    );
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   const SnackBar(content: Text('跳转到收藏记录')),
+    // );
+    Navigator.push(context, MaterialPageRoute(builder: (_) => WebPage()));
   }
 
   void _navigateToHistory() {

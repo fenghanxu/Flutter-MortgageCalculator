@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>房产知识 - 智能贷款计算器</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3CB371;
+            --min-color: #7FFFAA;
+            --secondary-color: #3CB371;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.7;
+            background-color: #f8f9fa;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--min-color));
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .app-icon i {
+            font-size: 36px;
+            color: var(--secondary-color);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--secondary-color);
+        }
+        
+        .knowledge-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .knowledge-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .knowledge-icon {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .knowledge-icon i {
+            font-size: 24px;
+            color: var(--secondary-color);
+        }
+        
+        .step-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            height: 100%;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--secondary-color);
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .tip-box {
+            background-color: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid var(--success-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info-box {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .calculator-box {
+            background: linear-gradient(135deg, var(--primary-color), var(--min-color));
+            color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .sticky-sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .term-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .term-title {
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 1.5rem 0;
+            }
+            
+            .app-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .app-icon i {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <div class="app-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <h1 class="display-5 fw-bold">房产知识</h1>
+                    <p class="lead">智能贷款计算器 - 购房指南与贷款知识</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <!-- 侧边导航 -->
+            <div class="col-lg-3 mb-4">
+                <div class="sticky-sidebar">
+                    <div class="knowledge-card">
+                        <h5 class="mb-3">知识导航</h5>
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-basics-tab" data-bs-toggle="pill" href="#v-pills-basics" role="tab" aria-controls="v-pills-basics" aria-selected="true">
+                                <i class="fas fa-home me-2"></i>购房基础
+                            </a>
+                            <a class="nav-link" id="v-pills-loan-tab" data-bs-toggle="pill" href="#v-pills-loan" role="tab" aria-controls="v-pills-loan" aria-selected="false">
+                                <i class="fas fa-hand-holding-usd me-2"></i>贷款知识
+                            </a>
+                            <a class="nav-link" id="v-pills-process-tab" data-bs-toggle="pill" href="#v-pills-process" role="tab" aria-controls="v-pills-process" aria-selected="false">
+                                <i class="fas fa-list-ol me-2"></i>购房流程
+                            </a>
+                            <a class="nav-link" id="v-pills-costs-tab" data-bs-toggle="pill" href="#v-pills-costs" role="tab" aria-controls="v-pills-costs" aria-selected="false">
+                                <i class="fas fa-calculator me-2"></i>费用计算
+                            </a>
+                            <a class="nav-link" id="v-pills-terms-tab" data-bs-toggle="pill" href="#v-pills-terms" role="tab" aria-controls="v-pills-terms" aria-selected="false">
+                                <i class="fas fa-book me-2"></i>专业术语
+                            </a>
+                            <a class="nav-link" id="v-pills-tips-tab" data-bs-toggle="pill" href="#v-pills-tips" role="tab" aria-controls="v-pills-tips" aria-selected="false">
+                                <i class="fas fa-lightbulb me-2"></i>购房技巧
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-box">
+                        <h5>立即计算</h5>
+                        <p>使用我们的贷款计算器规划您的购房预算</p>
+                        <button class="btn btn-light mt-2">
+                            <i class="fas fa-calculator me-1"></i> 打开计算器
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="col-lg-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <!-- 购房基础 -->
+                    <div class="tab-pane fade show active" id="v-pills-basics" role="tabpanel" aria-labelledby="v-pills-basics-tab">
+                        <h2 class="section-title">购房基础知识</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-city"></i>
+                                    </div>
+                                    <h4>房产类型</h4>
+                                    <p>了解不同类型的房产，包括商品房、经济适用房、公寓、别墅等，以及它们的特点和适用人群。</p>
+                                    <ul>
+                                        <li>商品房：市场化销售，产权清晰</li>
+                                        <li>经济适用房：政府补贴，价格较低</li>
+                                        <li>公寓：面积较小，适合单身或小家庭</li>
+                                        <li>别墅：独立住宅，私密性好</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-map-marked-alt"></i>
+                                    </div>
+                                    <h4>位置选择</h4>
+                                    <p>房产位置是决定价值的关键因素，需要考虑交通、教育、医疗、商业等配套设施。</p>
+                                    <ul>
+                                        <li>交通便利性：地铁、公交、高速公路</li>
+                                        <li>教育资源：学校质量、学区划分</li>
+                                        <li>生活配套：商场、医院、公园</li>
+                                        <li>未来发展：城市规划、区域潜力</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-ruler-combined"></i>
+                                    </div>
+                                    <h4>户型选择</h4>
+                                    <p>合理的户型设计能提高居住舒适度，需要考虑家庭成员数量、生活习惯等因素。</p>
+                                    <ul>
+                                        <li>一室一厅：适合单身人士</li>
+                                        <li>两室一厅：适合小家庭</li>
+                                        <li>三室一厅：适合有孩子的家庭</li>
+                                        <li>动静分区：活动区与休息区分离</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-hard-hat"></i>
+                                    </div>
+                                    <h4>建筑质量</h4>
+                                    <p>房屋建筑质量直接影响使用寿命和安全性，需要关注开发商信誉、建筑材料、施工工艺等。</p>
+                                    <ul>
+                                        <li>开发商资质：信誉、历史项目</li>
+                                        <li>建筑材料：环保、耐用性</li>
+                                        <li>施工工艺：细节处理、防水等</li>
+                                        <li>验收标准：是否符合国家标准</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <h5><i class="fas fa-lightbulb me-2"></i>购房小贴士</h5>
+                            <p>首次购房者应优先考虑自住需求，而非投资价值。选择适合当前家庭状况的房产，避免过度负债。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 贷款知识 -->
+                    <div class="tab-pane fade" id="v-pills-loan" role="tabpanel" aria-labelledby="v-pills-loan-tab">
+                        <h2 class="section-title">贷款知识</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-percentage"></i>
+                                    </div>
+                                    <h4>贷款类型</h4>
+                                    <p>了解不同类型的住房贷款，选择最适合自己的贷款方式。</p>
+                                    <ul>
+                                        <li><strong>商业贷款：</strong>利率较高，审批灵活</li>
+                                        <li><strong>公积金贷款：</strong>利率较低，条件限制多</li>
+                                        <li><strong>组合贷款：</strong>商业+公积金，平衡利率与额度</li>
+                                        <li><strong>LPR贷款：</strong>利率随市场浮动</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-file-invoice-dollar"></i>
+                                    </div>
+                                    <h4>还款方式</h4>
+                                    <p>不同的还款方式适合不同收入情况的借款人。</p>
+                                    <ul>
+                                        <li><strong>等额本息：</strong>月供固定，前期利息多</li>
+                                        <li><strong>等额本金：</strong>月供递减，总利息较少</li>
+                                        <li><strong>先息后本：</strong>前期只还利息，后期还本金</li>
+                                        <li><strong>一次性还本付息：</strong>到期一次性偿还</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <h4 class="mt-4">等额本息 vs 等额本金</h4>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>比较项目</th>
+                                    <th>等额本息</th>
+                                    <th>等额本金</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>月供金额</td>
+                                    <td>固定不变</td>
+                                    <td>逐月递减</td>
+                                </tr>
+                                <tr>
+                                    <td>前期还款压力</td>
+                                    <td>相对较小</td>
+                                    <td>相对较大</td>
+                                </tr>
+                                <tr>
+                                    <td>总利息支出</td>
+                                    <td>较多</td>
+                                    <td>较少</td>
+                                </tr>
+                                <tr>
+                                    <td>适用人群</td>
+                                    <td>收入稳定的上班族</td>
+                                    <td>前期收入较高的人群</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="info-box">
+                            <h5><i class="fas fa-info-circle me-2"></i>贷款资格</h5>
+                            <p>申请住房贷款通常需要满足以下条件：稳定的工作和收入来源、良好的信用记录、足够的首付款、符合银行要求的债务收入比。</p>
+                        </div>
+                        
+                        <div class="warning-box">
+                            <h5><i class="fas fa-exclamation-triangle me-2"></i>注意事项</h5>
+                            <p>贷款前请仔细评估自己的还款能力，避免过度负债。通常建议月供不超过家庭月收入的50%。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 购房流程 -->
+                    <div class="tab-pane fade" id="v-pills-process" role="tabpanel" aria-labelledby="v-pills-process-tab">
+                        <h2 class="section-title">购房流程指南</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="step-card">
+                                    <div class="step-number">1</div>
+                                    <h5>需求分析</h5>
+                                    <p>明确购房目的、预算、区域、户型等需求，做好充分的市场调研。</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="step-card">
+                                    <div class="step-number">2</div>
+                                    <h5>选房看房</h5>
+                                    <p>实地考察多个楼盘或二手房，比较不同选项的优缺点。</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="step-card">
+                                    <div class="step-number">3</div>
+                                    <h5>资金准备</h5>
+                                    <p>计算首付款、税费、装修等各项费用，确保资金充足。</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="step-card">
+                                    <div class="step-number">4</div>
+                                    <h5>贷款预审</h5>
+                                    <p>向银行提交贷款申请，获取贷款额度和利率的预审批。</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="step-card">
+                                    <div class="step-number">5</div>
+                                    <h5>签约付款</h5>
+                                    <p>签订购房合同，支付首付款，办理贷款手续。</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="step-card">
+                                    <div class="step-number">6</div>
+                                    <h5>过户交接</h5>
+                                    <p>办理房产过户手续，缴纳相关税费，接收房屋钥匙。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="info-box">
+                            <h5><i class="fas fa-clock me-2"></i>时间规划</h5>
+                            <p>整个购房流程通常需要2-4个月时间，其中贷款审批需要1-2周，过户手续需要2-4周。建议提前规划，留出充足时间。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 费用计算 -->
+                    <div class="tab-pane fade" id="v-pills-costs" role="tabpanel" aria-labelledby="v-pills-costs-tab">
+                        <h2 class="section-title">购房费用计算</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <h4>首付款</h4>
+                                    <p>购房时需要支付的首付款比例取决于房产类型和当地政策：</p>
+                                    <ul>
+                                        <li>首套房：通常为总价的20-30%</li>
+                                        <li>二套房：通常为总价的40-60%</li>
+                                        <li>商业房产：通常为总价的50%以上</li>
+                                    </ul>
+                                    <p class="text-muted">具体比例请参考当地最新政策</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <h4>贷款相关费用</h4>
+                                    <p>申请贷款时可能需要支付的费用：</p>
+                                    <ul>
+                                        <li>评估费：房产评估价值的0.1-0.5%</li>
+                                        <li>抵押登记费：几十至几百元</li>
+                                        <li>保险费：贷款金额×费率×年限</li>
+                                        <li>公证费：按当地标准收取</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <h4>税费</h4>
+                                    <p>购买房产需要缴纳的主要税费：</p>
+                                    <ul>
+                                        <li>契税：1-3%（根据面积和套数）</li>
+                                        <li>印花税：0.05%</li>
+                                        <li>登记费：几十至几百元</li>
+                                        <li>维修基金：按建筑面积计算</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <h4>其他费用</h4>
+                                    <p>购房过程中可能产生的其他费用：</p>
+                                    <ul>
+                                        <li>中介费：成交价的1-3%</li>
+                                        <li>装修费：根据装修标准而定</li>
+                                        <li>物业费：按建筑面积每月收取</li>
+                                        <li>水电燃气开户费</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="calculator-box">
+                            <h4>费用计算器</h4>
+                            <p>使用我们的专业计算器，精确计算您的购房总成本</p>
+                            <div class="row mt-3">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">房屋总价（万元）</label>
+                                        <input type="number" class="form-control" placeholder="例如：300">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">首付比例</label>
+                                        <select class="form-select">
+                                            <option>20%</option>
+                                            <option>30%</option>
+                                            <option>40%</option>
+                                            <option>50%</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">贷款年限</label>
+                                        <select class="form-select">
+                                            <option>10年</option>
+                                            <option>20年</option>
+                                            <option>30年</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-light w-100">
+                                        <i class="fas fa-calculator me-1"></i> 计算费用
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 专业术语 -->
+                    <div class="tab-pane fade" id="v-pills-terms" role="tabpanel" aria-labelledby="v-pills-terms-tab">
+                        <h2 class="section-title">房产专业术语</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="term-card">
+                                    <div class="term-title">LPR（贷款市场报价利率）</div>
+                                    <p>由各报价行根据本行对最优质客户的贷款利率，以公开市场操作利率加点形成的方式报价，由中国人民银行授权全国银行间同业拆借中心计算并公布的基础性的贷款参考利率。</p>
+                                </div>
+                                <div class="term-card">
+                                    <div class="term-title">等额本息</div>
+                                    <p>每月偿还同等数额的贷款（包括本金和利息），但每月还款额中的本金比重逐月递增、利息比重逐月递减。</p>
+                                </div>
+                                <div class="term-card">
+                                    <div class="term-title">等额本金</div>
+                                    <p>每月偿还同等数额的本金和剩余贷款在该月所产生的利息，这样由于每月的还款本金额固定，而利息越来越少，借款人起初还款压力较大，但是随时间的推移每月还款数也越来越少。</p>
+                                </div>
+                                <div class="term-card">
+                                    <div class="term-title">公积金贷款</div>
+                                    <p>缴存住房公积金的职工享受的贷款，国家规定，凡是缴存公积金的职工均可按公积金贷款的相关规定申请个人住房公积金贷款。</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="term-card">
+                                    <div class="term-title">商业贷款</div>
+                                    <p>用于补充工业和商业企业的流动资金的贷款，一般为短期贷款，通常为9个月，最多不超过一年，但也有少量中长期贷款。</p>
+                                </div>
+                                <div class="term-card">
+                                    <div class="term-title">组合贷款</div>
+                                    <p>符合个人住房商业性贷款条件的借款人又同时缴存住房公积金的，在办理个人住房商业贷款的同时还可以申请个人住房公积金贷款。</p>
+                                </div>
+                                <div class="term-card">
+                                    <div class="term-title">首套房</div>
+                                    <p>购买仅拥有一套住房，中国人民银行规定我国城市居民购买第一套住房享有按揭贷款利率优惠。</p>
+                                </div>
+                                <div class="term-card">
+                                    <div class="term-title">二套房</div>
+                                    <p>是第二套普通自住房的简称，是指以借款人家庭（包括借款人、配偶及未成年子女）为单位认定的，借款人家庭人均住房面积高于当地平均水平的，再次向商业银行申请住房贷款的房贷房。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 购房技巧 -->
+                    <div class="tab-pane fade" id="v-pills-tips" role="tabpanel" aria-labelledby="v-pills-tips-tab">
+                        <h2 class="section-title">购房实用技巧</h2>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-search-dollar"></i>
+                                    </div>
+                                    <h4>议价技巧</h4>
+                                    <p>掌握正确的议价方法可以帮您节省大量购房成本：</p>
+                                    <ul>
+                                        <li>了解周边同类房产价格，做到心中有数</li>
+                                        <li>指出房产的缺点，作为议价依据</li>
+                                        <li>表现出购买诚意，但不要急于表态</li>
+                                        <li>争取税费减免或其他优惠</li>
+                                        <li>考虑全款支付争取更大折扣</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-file-contract"></i>
+                                    </div>
+                                    <h4>合同审查</h4>
+                                    <p>签订购房合同时需要特别注意的条款：</p>
+                                    <ul>
+                                        <li>确认房屋信息与实际情况一致</li>
+                                        <li>明确交房日期和违约责任</li>
+                                        <li>核实面积差异处理方式</li>
+                                        <li>检查配套设施承诺是否写入合同</li>
+                                        <li>确认产权清晰无纠纷</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-hand-holding-usd"></i>
+                                    </div>
+                                    <h4>贷款优化</h4>
+                                    <p>合理规划贷款可以节省大量利息支出：</p>
+                                    <ul>
+                                        <li>提高首付比例，减少贷款金额</li>
+                                        <li>选择适合的还款方式</li>
+                                        <li>关注银行优惠政策</li>
+                                        <li>考虑提前还款的可能性</li>
+                                        <li>保持良好的信用记录</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="knowledge-card">
+                                    <div class="knowledge-icon">
+                                        <i class="fas fa-eye"></i>
+                                    </div>
+                                    <h4>验房技巧</h4>
+                                    <p>收房时的验房要点：</p>
+                                    <ul>
+                                        <li>检查墙面、地面是否平整</li>
+                                        <li>测试水电、燃气是否正常</li>
+                                        <li>检查门窗是否严密、开关顺畅</li>
+                                        <li>测试卫生间防水效果</li>
+                                        <li>核对配套设施是否齐全</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tip-box">
+                            <h5><i class="fas fa-gem me-2"></i>黄金法则</h5>
+                            <p><strong>量力而行：</strong>购房预算不要超过家庭年收入的5倍，月供不要超过家庭月收入的50%。</p>
+                            <p><strong>长远考虑：</strong>考虑未来5-10年的家庭变化，选择适合长期居住的房产。</p>
+                            <p><strong>实地考察：</strong>不同时间段多次看房，了解周边环境和社区氛围。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>智能贷款计算器</h5>
+                    <p>专业的金融工具，助您轻松规划财务未来</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 智能贷款计算器 版权所有</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-white me-3">房产知识</a>
+                        <a href="#" class="text-white me-3">贷款计算</a>
+                        <a href="#" class="text-white">购房指南</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // 简单的费用计算示例
+        document.querySelector('.calculator-box button').addEventListener('click', function() {
+            const price = document.querySelector('input[type="number"]').value;
+            if(price) {
+                alert(`根据您的输入，我们估算首付款约为${price * 0.3}万元，贷款金额约为${price * 0.7}万元。详细计算请使用我们的专业计算器。`);
+            } else {
+                alert('请输入房屋总价');
+            }
+        });
+    </script>
+</body>
+</html>

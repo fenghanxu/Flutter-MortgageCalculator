@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutterdemols/HistoryPage.dart';
-import 'package:flutterdemols/CollectPage.dart';
 
 /// 字符串扩展工具类
 class StringExtension {

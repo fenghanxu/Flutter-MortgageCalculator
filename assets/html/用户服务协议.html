@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户服务协议 - 智能贷款计算器</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3CB371;
+            --min-color: #7FFFAA;
+            --secondary-color: #3CB371;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            line-height: 1.7;
+            background-color: #f8f9fa;
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--min-color));
+            color: white;
+            padding: 2rem 0;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+        
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .app-icon i {
+            font-size: 36px;
+            color: var(--secondary-color);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .agreement-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .clause-highlight {
+            background-color: rgba(52, 152, 219, 0.1);
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning-highlight {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .agreement-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .agreement-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .agreement-list li:before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            text-align: left;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .nav-pills .nav-link i {
+            width: 20px;
+            margin-right: 10px;
+        }
+        
+        .update-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .contact-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .contact-icon i {
+            font-size: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .sticky-sidebar {
+            position: sticky;
+            top: 20px;
+        }
+        
+        .acceptance-box {
+            background-color: rgba(46, 204, 113, 0.1);
+            border: 2px solid #2ecc71;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .clause-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section {
+                padding: 1.5rem 0;
+            }
+            
+            .app-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .app-icon i {
+                font-size: 28px;
+            }
+            
+            .agreement-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部区域 -->
+    <header class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-2 text-center">
+                    <div class="app-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <h1 class="display-5 fw-bold">用户服务协议</h1>
+                    <p class="lead">智能贷款计算器 - 服务条款与使用条件</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            <!-- 侧边导航 -->
+            <div class="col-lg-3 mb-4">
+                <div class="sticky-sidebar">
+                    <div class="agreement-card">
+                        <h5 class="mb-3">协议目录</h5>
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-intro-tab" data-bs-toggle="pill" href="#v-pills-intro" role="tab" aria-controls="v-pills-intro" aria-selected="true">
+                                <i class="fas fa-file-contract"></i>协议引言
+                            </a>
+                            <a class="nav-link" id="v-pills-definition-tab" data-bs-toggle="pill" href="#v-pills-definition" role="tab" aria-controls="v-pills-definition" aria-selected="false">
+                                <i class="fas fa-book"></i>术语定义
+                            </a>
+                            <a class="nav-link" id="v-pills-service-tab" data-bs-toggle="pill" href="#v-pills-service" role="tab" aria-controls="v-pills-service" aria-selected="false">
+                                <i class="fas fa-cogs"></i>服务内容
+                            </a>
+                            <a class="nav-link" id="v-pills-account-tab" data-bs-toggle="pill" href="#v-pills-account" role="tab" aria-controls="v-pills-account" aria-selected="false">
+                                <i class="fas fa-user"></i>账户管理
+                            </a>
+                            <a class="nav-link" id="v-pills-rights-tab" data-bs-toggle="pill" href="#v-pills-rights" role="tab" aria-controls="v-pills-rights" aria-selected="false">
+                                <i class="fas fa-balance-scale"></i>权利义务
+                            </a>
+                            <a class="nav-link" id="v-pills-payment-tab" data-bs-toggle="pill" href="#v-pills-payment" role="tab" aria-controls="v-pills-payment" aria-selected="false">
+                                <i class="fas fa-credit-card"></i>费用说明
+                            </a>
+                            <a class="nav-link" id="v-pills-disclaimer-tab" data-bs-toggle="pill" href="#v-pills-disclaimer" role="tab" aria-controls="v-pills-disclaimer" aria-selected="false">
+                                <i class="fas fa-exclamation-triangle"></i>免责声明
+                            </a>
+                            <a class="nav-link" id="v-pills-liability-tab" data-bs-toggle="pill" href="#v-pills-liability" role="tab" aria-controls="v-pills-liability" aria-selected="false">
+                                <i class="fas fa-gavel"></i>责任限制
+                            </a>
+                            <a class="nav-link" id="v-pills-termination-tab" data-bs-toggle="pill" href="#v-pills-termination" role="tab" aria-controls="v-pills-termination" aria-selected="false">
+                                <i class="fas fa-ban"></i>协议终止
+                            </a>
+                            <a class="nav-link" id="v-pills-general-tab" data-bs-toggle="pill" href="#v-pills-general" role="tab" aria-controls="v-pills-general" aria-selected="false">
+                                <i class="fas fa-file-alt"></i>通用条款
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="agreement-card mt-4">
+                        <h6>最后更新</h6>
+                        <p class="mb-1">2023年10月15日</p>
+                        <span class="update-badge">最新版本</span>
+                        
+                        <h6 class="mt-3">生效日期</h6>
+                        <p>2023年10月15日</p>
+                        
+                        <div class="acceptance-box mt-3">
+                            <p><strong>使用本应用即表示您同意本协议的所有条款</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容区域 -->
+            <div class="col-lg-9">
+                <div class="agreement-card">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <!-- 协议引言 -->
+                        <div class="tab-pane fade show active" id="v-pills-intro" role="tabpanel" aria-labelledby="v-pills-intro-tab">
+                            <h2 class="section-title">用户服务协议</h2>
+                            
+                            <div class="clause-highlight">
+                                <p><strong>重要提示：</strong>请您仔细阅读本用户服务协议（以下简称"本协议"）的全部条款，特别是免除或者限制责任的条款、法律适用和争议解决条款。免除或者限制责任的条款将以粗体标识，您应重点阅读。如您对本协议有任何疑问，请联系我们的客服。</p>
+                            </div>
+                            
+                            <p>欢迎使用智能贷款计算器（以下简称"本应用"）服务！本应用由【公司名称】（以下简称"我们"或"本公司"）开发并运营。</p>
+                            
+                            <p><strong>在您开始使用本应用之前，请务必认真阅读并充分理解本协议的全部内容。</strong>如果您不同意本协议的任意内容，或者无法准确理解条款的解释，请立即停止使用本应用。一旦您开始使用本应用，即表示您已充分理解并同意接受本协议的全部内容，本协议即在您与我们之间产生法律效力。</p>
+                            
+                            <p>本协议包括协议正文及所有我们已经发布或将来可能发布的各类规则、声明、通知、警示、提示、说明等（以下统称"规则"）。所有规则为本协议不可分割的组成部分，与本协议正文具有同等法律效力。</p>
+                            
+                            <h5>协议确认</h5>
+                            <p>您通过页面点击或其他方式确认即表示您同意接受协议的全部内容，确认程序即视为您已阅读并同意接受本协议的约束。</p>
+                            
+                            <p>我们有权根据需要不时地制定、修改本协议和/或各类规则，如有任何变更，我们将在应用上公布修订后的协议和规则，经修订的协议和规则一经公布，立即自动生效。如您不同意相关变更，必须立即停止使用本应用。继续使用本应用将被视为您已接受经修订的协议和规则。</p>
+                        </div>
+                        
+                        <!-- 术语定义 -->
+                        <div class="tab-pane fade" id="v-pills-definition" role="tabpanel" aria-labelledby="v-pills-definition-tab">
+                            <h2 class="section-title">术语定义</h2>
+                            
+                            <p>除非本协议另有约定，下列术语在本协议中的定义如下：</p>
+                            
+                            <ul class="agreement-list">
+                                <li><strong>本应用：</strong>指由我们开发并运营的"智能贷款计算器"移动应用程序，包括其后续更新版本和衍生版本。</li>
+                                <li><strong>用户：</strong>指使用本应用服务的个人、法人或其他组织，在本协议中更多地称为"您"。</li>
+                                <li><strong>服务：</strong>指我们通过本应用向您提供的各项服务，包括但不限于贷款计算、还款计划生成、财务分析等功能。</li>
+                                <li><strong>账户：</strong>指您在使用本应用服务时，按照本应用要求注册的账户。</li>
+                                <li><strong>计算数据：</strong>指您在使用本应用服务时输入的本金、利率、期限等用于贷款计算的参数信息。</li>
+                                <li><strong>计算结果：</strong>指本应用基于您输入的计算数据生成的贷款计算结果，包括但不限于月供金额、总利息、还款计划表等。</li>
+                                <li><strong>个人信息：</strong>指以电子或者其他方式记录的能够单独或者与其他信息结合识别特定自然人身份或者反映特定自然人活动情况的各种信息。</li>
+                                <li><strong>内容：</strong>指您在使用本应用服务过程中制作、复制、发布、传播的任何内容，包括但不限于文字、图片、链接等信息。</li>
+                            </ul>
+                            
+                            <h5>解释规则</h5>
+                            <p>本协议中使用"包括"、"包含"等词语时，意指"包括但不限于"。本协议各条款的标题仅为方便阅读而设，不影响本协议任何条款的含义或解释。</p>
+                        </div>
+                        
+                        <!-- 服务内容 -->
+                        <div class="tab-pane fade" id="v-pills-service" role="tabpanel" aria-labelledby="v-pills-service-tab">
+                            <h2 class="section-title">服务内容</h2>
+                            
+                            <p>我们通过本应用向您提供以下服务：</p>
+                            
+                            <h5><span class="clause-number">1</span> 基础计算服务</h5>
+                            <ul class="agreement-list">
+                                <li>提供等额本息、等额本金等多种还款方式的贷款计算</li>
+                                <li>生成详细的月度还款计划表</li>
+                                <li>计算贷款总利息、总还款额等关键指标</li>
+                                <li>支持不同利率类型（固定利率、LPR浮动利率）的计算</li>
+                                <li>提供提前还款计算功能</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">2</span> 高级功能服务</h5>
+                            <ul class="agreement-list">
+                                <li>多贷款方案对比分析</li>
+                                <li>贷款计算历史记录保存</li>
+                                <li>计算结果导出与分享</li>
+                                <li>个性化财务分析报告</li>
+                                <li>利率趋势与市场信息</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">3</span> 服务形式</h5>
+                            <p>我们提供的服务包括免费服务和付费服务：</p>
+                            <ul class="agreement-list">
+                                <li><strong>免费服务：</strong>基础贷款计算功能对所有用户免费开放</li>
+                                <li><strong>付费服务：</strong>高级功能需要您购买相应的服务套餐</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">4</span> 服务变更与中断</h5>
+                            <p>我们保留随时变更、中断或终止部分或全部服务的权利。如发生服务变更、中断或终止的情形，我们将尽可能提前通知您，但因不可抗力或非我们可控的原因导致的服务变更、中断或终止除外。</p>
+                            
+                            <div class="warning-highlight">
+                                <p><strong>重要声明：</strong>本应用提供的计算结果仅供参考，不构成任何金融建议或贷款承诺。实际贷款条件以金融机构的最终审批为准。您应独立判断计算结果的适用性，并承担据此决策的全部风险。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 账户管理 -->
+                        <div class="tab-pane fade" id="v-pills-account" role="tabpanel" aria-labelledby="v-pills-account-tab">
+                            <h2 class="section-title">账户管理</h2>
+                            
+                            <h5><span class="clause-number">1</span> 账户注册</h5>
+                            <p>您在使用部分服务前需要注册一个账户。您注册时应当提供真实、准确、完整和反映当前情况的身份信息及相关资料，并及时更新这些信息。</p>
+                            
+                            <h5><span class="clause-number">2</span> 账户安全</h5>
+                            <p>您应对您的账户和密码的安全负全部责任，并对通过您的账户和密码实施的所有行为负责。您同意：</p>
+                            <ul class="agreement-list">
+                                <li>不向任何其他人泄露您的账户或密码</li>
+                                <li>立即通知我们任何未经授权使用您的账户或其它破坏安全的情况</li>
+                                <li>确保您在每次使用完毕后安全退出</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">3</span> 账户使用规范</h5>
+                            <p>您不得将账户用于任何非法或未经授权的目的。在使用本应用服务时，您不得以任何方式违反任何适用的法律或法规。</p>
+                            
+                            <h5><span class="clause-number">4</span> 账户注销</h5>
+                            <p>您可以按照本应用提供的注销指引和方式申请注销您的账户。账户注销后，您将无法再使用此账户登录本应用，账户内的所有信息将被删除或匿名化处理，法律法规另有规定的除外。</p>
+                            
+                            <div class="clause-highlight">
+                                <p><strong>注意：</strong>我们保留根据实际情况拒绝为您提供注册和/或使用账户服务的权利，且不承担任何解释义务。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 权利义务 -->
+                        <div class="tab-pane fade" id="v-pills-rights" role="tabpanel" aria-labelledby="v-pills-rights-tab">
+                            <h2 class="section-title">权利与义务</h2>
+                            
+                            <h5><span class="clause-number">1</span> 您的权利</h5>
+                            <ul class="agreement-list">
+                                <li>有权使用我们提供的各项服务</li>
+                                <li>有权随时查询、更正您的个人信息</li>
+                                <li>有权根据本协议约定注销您的账户</li>
+                                <li>有权对我们服务提出意见或建议</li>
+                                <li>有权在符合条件时享受我们提供的其他增值服务</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">2</span> 您的义务</h5>
+                            <ul class="agreement-list">
+                                <li>遵守本协议及所有相关规则</li>
+                                <li>提供真实、准确、完整的个人信息并及时更新</li>
+                                <li>妥善保管账户信息并对账户下所有行为负责</li>
+                                <li>不得利用本应用从事任何违法违规活动</li>
+                                <li>不得干扰或破坏本应用的正常运行</li>
+                                <li>不得侵犯我们或第三方的合法权益</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">3</span> 我们的权利</h5>
+                            <ul class="agreement-list">
+                                <li>有权制定、修改服务规则和服务价格</li>
+                                <li>有权对您的使用行为进行监督和管理</li>
+                                <li>有权在发现异常使用情况时暂停或终止服务</li>
+                                <li>有权根据业务需要调整服务内容和服务形式</li>
+                                <li>有权对违法违规行为采取必要措施</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">4</span> 我们的义务</h5>
+                            <ul class="agreement-list">
+                                <li>依法保护您的个人信息安全</li>
+                                <li>依法保障服务的稳定性和安全性</li>
+                                <li>及时处理您的咨询和投诉</li>
+                                <li>依法履行法律法规规定的其他义务</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 费用说明 -->
+                        <div class="tab-pane fade" id="v-pills-payment" role="tabpanel" aria-labelledby="v-pills-payment-tab">
+                            <h2 class="section-title">费用说明</h2>
+                            
+                            <h5><span class="clause-number">1</span> 免费服务</h5>
+                            <p>本应用的基础贷款计算功能对所有用户免费提供，您无需支付任何费用即可使用这些功能。</p>
+                            
+                            <h5><span class="clause-number">2</span> 付费服务</h5>
+                            <p>部分高级功能需要您支付相应费用后方可使用。具体服务内容和价格以应用内展示的为准。</p>
+                            
+                            <h5><span class="clause-number">3</span> 价格调整</h5>
+                            <p>我们保留随时调整服务价格的权利，价格调整将在应用内公示后生效。如您不同意调整后的价格，可以停止使用相关付费服务。</p>
+                            
+                            <h5><span class="clause-number">4</span> 支付方式</h5>
+                            <p>您可以通过应用内购买的方式支付相关费用，具体支付方式以应用支持的支付渠道为准。</p>
+                            
+                            <h5><span class="clause-number">5</span> 发票开具</h5>
+                            <p>如您需要开具发票，请按照应用内的指引提交开票申请。我们将在收到申请后的15个工作日内为您开具并寄送发票。</p>
+                            
+                            <div class="warning-highlight">
+                                <p><strong>退款政策：</strong>数字产品和服务一旦购买即视为交付完成，除法律法规另有规定或我们另有承诺外，我们一般不提供退款服务。请在购买前仔细确认您的需求。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 免责声明 -->
+                        <div class="tab-pane fade" id="v-pills-disclaimer" role="tabpanel" aria-labelledby="v-pills-disclaimer-tab">
+                            <h2 class="section-title">免责声明</h2>
+                            
+                            <h5><span class="clause-number">1</span> 计算准确性</h5>
+                            <p>我们尽最大努力确保计算结果的准确性，但由于金融政策的变动、计算方法的差异或其他不可控因素，计算结果可能与实际贷款情况存在差异。<strong>本应用提供的所有计算结果仅供参考，不构成任何金融建议，您应自行核实相关信息的准确性。</strong></p>
+                            
+                            <h5><span class="clause-number">2</span> 服务可用性</h5>
+                            <p>我们无法保证服务不会中断，也无法保证服务的及时性、安全性、准确性。对于因系统维护、升级或因不可抗力导致的服务中断，我们不承担任何责任。</p>
+                            
+                            <h5><span class="clause-number">3</span> 第三方服务</h5>
+                            <p>本应用可能包含指向第三方网站或服务的链接。这些链接仅为方便您而提供，我们不对这些网站或服务的内容、隐私政策或做法负责。</p>
+                            
+                            <h5><span class="clause-number">4</span> 用户行为</h5>
+                            <p>您应对使用本应用服务时的一切行为自行承担责任。我们不对您使用本应用服务时导致的任何直接、间接、偶然、特殊及后续的损失承担责任。</p>
+                            
+                            <h5><span class="clause-number">5</span> 不可抗力</h5>
+                            <p>对于因我们不能控制的原因（包括但不限于自然灾害、战争、动乱、罢工、政府行为、互联网中断、黑客攻击、计算机病毒等）造成的服务中断或其它缺陷，我们不承担任何责任。</p>
+                            
+                            <div class="warning-highlight">
+                                <p><strong>重要提醒：</strong>贷款是重要的金融决策，涉及重大利益。在做出任何贷款决策前，请务必咨询专业的金融顾问或直接与金融机构沟通，详细了解贷款产品的具体条款和条件。</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 责任限制 -->
+                        <div class="tab-pane fade" id="v-pills-liability" role="tabpanel" aria-labelledby="v-pills-liability-tab">
+                            <h2 class="section-title">责任限制</h2>
+                            
+                            <h5><span class="clause-number">1</span> 责任范围</h5>
+                            <p>在任何情况下，我们对您的直接损害的赔偿责任不应超过您就引起索赔的服务向我们支付的费用总额（如有）。</p>
+                            
+                            <h5><span class="clause-number">2</span> 责任排除</h5>
+                            <p>在任何情况下，我们均不对任何间接性、后果性、惩戒性、偶然性、特殊性或刑罚性的损害承担责任，包括因您使用本应用服务而遭受的利润损失。</p>
+                            
+                            <h5><span class="clause-number">3</span> 责任豁免情形</h5>
+                            <p>我们对下列情形不承担责任：</p>
+                            <ul class="agreement-list">
+                                <li>因不可抗力、计算机病毒或黑客攻击等造成的服务中断或缺陷</li>
+                                <li>由于政府命令、法律法规的变更、紧急情况所致服务中断或缺陷</li>
+                                <li>由于与本公司链接的其它网站或平台所造成的个人资料泄露及由此而导致的任何法律争议和后果</li>
+                                <li>用户将密码告知他人或与他人共享账户所致任何个人资料泄露</li>
+                                <li>用户使用与本应用服务相关的第三方服务所致纠纷或损失</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">4</span> 法律法规允许的限度</h5>
+                            <p>本协议中的责任限制条款在法律法规允许的最大限度内适用。某些司法管辖区不允许排除或限制间接或附带损害的责任，因此上述限制可能不适用于您。</p>
+                        </div>
+                        
+                        <!-- 协议终止 -->
+                        <div class="tab-pane fade" id="v-pills-termination" role="tabpanel" aria-labelledby="v-pills-termination-tab">
+                            <h2 class="section-title">协议终止</h2>
+                            
+                            <h5><span class="clause-number">1</span> 协议有效期</h5>
+                            <p>本协议自您接受之日起生效，直至根据本协议约定终止。</p>
+                            
+                            <h5><span class="clause-number">2</span> 您的终止权</h5>
+                            <p>您可以随时通过以下方式终止本协议：</p>
+                            <ul class="agreement-list">
+                                <li>停止使用本应用服务</li>
+                                <li>通过应用内功能注销您的账户</li>
+                                <li>通过客服渠道通知我们终止服务</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">3</span> 我们的终止权</h5>
+                            <p>在下列情况下，我们有权终止本协议：</p>
+                            <ul class="agreement-list">
+                                <li>您违反本协议的任何规定</li>
+                                <li>法律法规或政府机关要求</li>
+                                <li>由于安全原因或必要维护的需要</li>
+                                <li>我们决定停止提供相关服务</li>
+                                <li>其他我们认为需要终止协议的情形</li>
+                            </ul>
+                            
+                            <h5><span class="clause-number">4</span> 终止后果</h5>
+                            <p>协议终止后：</p>
+                            <ul class="agreement-list">
+                                <li>您使用本应用服务的权利立即终止</li>
+                                <li>您应立即停止使用本应用及相关服务</li>
+                                <li>我们有权删除或匿名化处理您的相关信息</li>
+                                <li>已经支付的费用不予退还（法律法规另有规定的除外）</li>
+                                <li>不影响终止前已经产生的权利和义务</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- 通用条款 -->
+                        <div class="tab-pane fade" id="v-pills-general" role="tabpanel" aria-labelledby="v-pills-general-tab">
+                            <h2 class="section-title">通用条款</h2>
+                            
+                            <h5><span class="clause-number">1</span> 完整协议</h5>
+                            <p>本协议构成您与我们之间就本协议所涉事项的完整协议，并取代所有先前的口头或书面协议。</p>
+                            
+                            <h5><span class="clause-number">2</span> 可分割性</h5>
+                            <p>如果本协议的任何条款被认定为无效或不可执行，该条款应在最小必要范围内进行修改使其有效和可执行，且不影响本协议其他条款的有效性。</p>
+                            
+                            <h5><span class="clause-number">3</span> 权利保留</h5>
+                            <p>我们未行使或执行本协议的任何权利或条款不构成对该权利或条款的放弃。</p>
+                            
+                            <h5><span class="clause-number">4</span> 协议转让</h5>
+                            <p>您不得转让本协议项下的任何权利或义务。我们有权将本协议项下的权利和义务转让给关联公司或继任者。</p>
+                            
+                            <h5><span class="clause-number">5</span> 通知送达</h5>
+                            <p>我们向您发出的通知可采用应用内公告、电子邮件、手机短信或常规信件等方式。该等通知在发送之日视为已送达。</p>
+                            
+                            <h5><span class="clause-number">6</span> 法律适用</h5>
+                            <p>本协议的订立、执行、解释及争议的解决均适用中华人民共和国法律。</p>
+                            
+                            <h5><span class="clause-number">7</span> 争议解决</h5>
+                            <p>因本协议引起的或与本协议有关的任何争议，双方应首先通过友好协商解决。协商不成的，任何一方均有权将争议提交至被告所在地有管辖权的人民法院诉讼解决。</p>
+                            
+                            <div class="clause-highlight">
+                                <p><strong>协议确认：</strong>您确认已仔细阅读并完全理解本协议的所有条款，特别是以粗体标识的条款。您点击"同意"按钮或开始使用本应用服务，即表示您接受本协议的所有条款和条件。</p>
+                            </div>
+                            
+                            <div class="contact-info">
+                                <h5>联系我们</h5>
+                                <p>如您对本协议有任何疑问、意见或建议，请通过以下方式联系我们：</p>
+                                
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-envelope"></i>
+                                    </div>
+                                    <div>
+                                        <h6>邮箱</h6>
+                                        <p>1162851277@qq.com</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <h6>客服热线</h6>
+                                        <p>400-2289-5257</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="contact-icon">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <h6>公司地址</h6>
+                                        <p>广州江湾中心32层</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>智能贷款计算器</h5>
+                    <p>专业的金融工具，助您轻松规划财务未来</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p>&copy; 2023 智能贷款计算器 版权所有</p>
+                    <div class="mt-2">
+                        <a href="#" class="text-white me-3">用户协议</a>
+                        <a href="#" class="text-white me-3">隐私政策</a>
+                        <a href="#" class="text-white">服务条款</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
