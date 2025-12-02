@@ -100,21 +100,6 @@ class _MePageState extends State<MePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // 隐藏默认AppBar，使用自定义布局
-              Container(
-                height: kToolbarHeight,
-                color: const Color(0xFFF9FAFB),
-                child: Center(
-                  child: Text(
-                    '我的',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
               // 登录卡片
               _buildLoginCard(),
               // 功能导航
@@ -245,7 +230,6 @@ class _MePageState extends State<MePage> {
             showArrow: true,
             onTap: _navigateToCollection,
           ),
-          const Divider(height: 1, color: ColorApp.line),
           // 历史计算按钮
           MeButton(
             imageColor: const Color(0xFFDBEAFE),
@@ -254,7 +238,6 @@ class _MePageState extends State<MePage> {
             showArrow: true,
             onTap: _navigateToHistory,
           ),
-          const Divider(height: 1, color: ColorApp.line),
           // 最新利率按钮
           MeButton(
             imageColor: const Color(0xFFDCFCE7),
@@ -263,7 +246,6 @@ class _MePageState extends State<MePage> {
             showArrow: true,
             onTap: () => _navigateToWeb('最新利率'),
           ),
-          const Divider(height: 1, color: ColorApp.line),
           // 房产知识按钮
           MeButton(
             imageColor: const Color(0xFFF3E8FF),
@@ -272,6 +254,7 @@ class _MePageState extends State<MePage> {
             showArrow: true,
             onTap: () => _navigateToWeb('房贷知识'),
           ),
+          const SizedBox(height: 15),
         ],
       ),
     );
@@ -315,7 +298,6 @@ class _MePageState extends State<MePage> {
             showArrow: true,
             onTap: () => _navigateToWeb('关于我们'),
           ),
-          const Divider(height: 1, color: ColorApp.line),
           // 帮助中心按钮
           MeButton(
             imageColor: const Color(0xFFF3F4F6),
@@ -324,7 +306,6 @@ class _MePageState extends State<MePage> {
             showArrow: true,
             onTap: () => _navigateToWeb('帮助中心'),
           ),
-          const Divider(height: 1, color: ColorApp.line),
           // 隐私政策按钮
           MeButton(
             imageColor: const Color(0xFFF3F4F6),
@@ -333,7 +314,6 @@ class _MePageState extends State<MePage> {
             showArrow: true,
             onTap: () => _navigateToWeb('隐私政策'),
           ),
-          const Divider(height: 1, color: ColorApp.line),
           // 清除缓存按钮
           MeButton(
             imageColor: const Color(0xFFF3F4F6),
@@ -343,6 +323,7 @@ class _MePageState extends State<MePage> {
             cacheSize: _cacheSize,
             onTap: _clearCache,
           ),
+          const SizedBox(height: 15),
         ],
       ),
     );

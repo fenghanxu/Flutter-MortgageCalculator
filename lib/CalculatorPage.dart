@@ -92,6 +92,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Widget _buildLoanMethodView() {
     return Container(
       width: double.infinity,
+      margin: const EdgeInsets.only(left: 15, right: 15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -149,13 +150,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   Widget _buildMethodButton(String text, int index, bool isSelected) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: () {
         setState(() {
           _selectedLoanMethod = index;
         });
       },
-      style: ElevatedButton.styleFrom(
+      style: TextButton.styleFrom(
         backgroundColor: isSelected ? ColorApp.themeWeak : Colors.white,
         foregroundColor: isSelected ? ColorApp.theme : const Color(0xFF8C8C8C),
         side: BorderSide(
@@ -174,9 +175,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
     );
   }
 
+
   Widget _buildCalculateView() {
     return Container(
       width: double.infinity,
+      margin: const EdgeInsets.only(left: 15, right: 15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -234,13 +237,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   Widget _buildCalculateButton(String text, int index, bool isSelected) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: () {
         setState(() {
           _selectedCalculateMethod = index;
         });
       },
-      style: ElevatedButton.styleFrom(
+      style: TextButton.styleFrom(
         backgroundColor: isSelected ? ColorApp.themeWeak : Colors.white,
         foregroundColor: isSelected ? ColorApp.theme : const Color(0xFF8C8C8C),
         side: BorderSide(
@@ -262,6 +265,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Widget _buildLoanMessageView() {
     return Container(
       width: double.infinity,
+      margin: const EdgeInsets.only(left: 15, right: 15),
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -303,7 +307,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
             Text(
@@ -328,9 +332,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
           controller: _loanAmountController,
           decoration: const InputDecoration(
             hintText: '请输入贷款金额',
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFD9D9D9)),
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+            hintStyle: TextStyle(
+              fontSize: 18,
+              color: ColorApp.textSub,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorApp.line),
+              borderRadius:  BorderRadius.all(Radius.circular(8)),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorApp.theme),
@@ -345,7 +353,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           ),
           keyboardType: TextInputType.number,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 5),
         Slider(
           value: _loanAmountValue,
           min: 1,
@@ -355,8 +363,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
           inactiveColor: const Color(0xFFE5E5E5),
           onChanged: _onLoanAmountSliderChanged,
         ),
-        const SizedBox(height: 13),
-        Row(
+        const SizedBox(height: 0),
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
             Text(
@@ -408,9 +416,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
           controller: _loanTermController,
           decoration: const InputDecoration(
             hintText: '请输入贷款期限',
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFD9D9D9)),
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+            hintStyle: TextStyle(
+              fontSize: 18,
+              color: ColorApp.textSub,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorApp.line),
+              borderRadius:  BorderRadius.all(Radius.circular(8)),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorApp.theme),
@@ -426,16 +438,24 @@ class _CalculatorPageState extends State<CalculatorPage> {
           keyboardType: TextInputType.number,
         ),
         const SizedBox(height: 20),
-        Slider(
-          value: _loanTermValue,
-          min: 1,
-          max: 30,
-          divisions: 29,
-          activeColor: ColorApp.theme,
-          inactiveColor: const Color(0xFFE5E5E5),
-          onChanged: _onLoanTermSliderChanged,
+
+        SliderTheme(
+          data: SliderThemeData(
+            trackHeight: 4,
+            thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8),
+            overlayShape: RoundSliderOverlayShape(overlayRadius: 12),
+          ),
+          child:         Slider(
+            value: _loanTermValue,
+            min: 1,
+            max: 30,
+            divisions: 29,
+            activeColor: ColorApp.theme,
+            inactiveColor: const Color(0xFFE5E5E5),
+            onChanged: _onLoanTermSliderChanged,
+          ),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 0),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
@@ -463,7 +483,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: const [
             Text(
@@ -488,9 +508,13 @@ class _CalculatorPageState extends State<CalculatorPage> {
           controller: _loanInterestRateController,
           decoration: const InputDecoration(
             hintText: '请输入贷款利率',
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Color(0xFFD9D9D9)),
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+            hintStyle: TextStyle(
+              fontSize: 18,
+              color: ColorApp.textSub,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: ColorApp.line),
+              borderRadius:  BorderRadius.all(Radius.circular(8)),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: ColorApp.theme),
@@ -530,9 +554,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   Widget _buildInterestRateButton(String text, int index) {
-    return ElevatedButton(
+    return TextButton(
       onPressed: () => _onInterestRateButtonPressed(index),
-      style: ElevatedButton.styleFrom(
+      style: TextButton.styleFrom(
         backgroundColor: const Color(0xFFF5F5F5),
         foregroundColor: const Color(0xFF8C8C8C),
         shape: RoundedRectangleBorder(
@@ -543,6 +567,38 @@ class _CalculatorPageState extends State<CalculatorPage> {
       child: Text(
         text,
         style: const TextStyle(fontSize: 12),
+      ),
+    );
+  }
+
+  Widget _calculatorButton() {
+    return Container(
+      width: double.infinity,
+      height: 60,
+      margin: const EdgeInsets.symmetric(horizontal: 15),
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const CalculatorDetailPage(),
+            ),
+          );
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: ColorApp.theme,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        child: const Text(
+          '开始计算',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }
@@ -571,35 +627,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             _buildLoanMessageView(),
             const SizedBox(height: 40),
             // 开始计算按钮
-            Container(
-              width: double.infinity,
-              height: 60,
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const CalculatorDetailPage(),
-                    ),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorApp.theme,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                ),
-                child: const Text(
-                  '开始计算',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+            _calculatorButton(),
           ],
         ),
       ),

@@ -62,7 +62,7 @@ class HistoryCell extends StatelessWidget {
           children: [
             // 标题行
             Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only( top: 0,left: 15, right: 15, bottom: 0),
               child: Row(
                 children: [
                   Text(
@@ -94,7 +94,7 @@ class HistoryCell extends StatelessWidget {
                   ),
                   // 删除按钮
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.delete_outline,
                       color: ColorApp.textSub,
                       size: 20,
@@ -111,7 +111,7 @@ class HistoryCell extends StatelessWidget {
             ),
             // 时间
             Padding(
-              padding: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+              padding: const EdgeInsets.only( top: 0,left: 15, right: 15, bottom: 0),
               child: Text(
                 data['time'] ?? '',
                 style: TextStyle(
@@ -202,7 +202,7 @@ class HistoryCell extends StatelessWidget {
             ),
             // 月供和详情按钮
             Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.only(top: 0,left: 15,right: 15,bottom: 15),
               child: Row(
                 children: [
                   RichText(
@@ -228,24 +228,29 @@ class HistoryCell extends StatelessWidget {
                   ),
                   const Spacer(),
                   Container(
-                    width: 90,
+                    width: 100,
                     height: 30,
-                    child: TextButton.icon(
+                    child: TextButton(
                       onPressed: onTap,
-                      icon: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 14,
-                        color: ColorApp.theme,
-                      ),
-                      label: Text(
-                        '查看详情',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: ColorApp.theme,
-                        ),
-                      ),
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 8),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '查看详情',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: ColorApp.theme,
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            size: 14,
+                            color: ColorApp.theme,
+                          ),
+                        ],
                       ),
                     ),
                   ),

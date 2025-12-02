@@ -1,6 +1,6 @@
 // history_header_view.dart
 import 'package:flutter/material.dart';
-import 'package:flutterdemols/Base/Extension/ColorApp.dart';
+import 'package:flutterdemols/Base/Base.dart';
 
 class HistoryHeaderView extends StatefulWidget {
   const HistoryHeaderView({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _HistoryHeaderViewState extends State<HistoryHeaderView> {
         child: Row(
           children: [
             const SizedBox(width: 15),
-            Icon(
+            const Icon(
               Icons.search,
               color: ColorApp.textSub,
               size: 20,
@@ -39,7 +39,7 @@ class _HistoryHeaderViewState extends State<HistoryHeaderView> {
                 decoration: const InputDecoration(
                   hintText: '请输入搜索内容',
                   border: InputBorder.none,
-                  hintStyle: TextStyle(fontSize: 14),
+                  hintStyle: TextStyle(fontSize: 14, color:ColorApp.textSub ),
                 ),
                 style: const TextStyle(fontSize: 14, color: Colors.black),
                 onChanged: (value) {

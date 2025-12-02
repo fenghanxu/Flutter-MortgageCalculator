@@ -142,7 +142,7 @@ class _CollectPageState extends State<CollectPage> {
 
   Widget _buildTitleRow() {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.only(left: 15,right: 15, top: 0, bottom: 0),
       child: Row(
         children: [
           Text(
@@ -171,7 +171,7 @@ class _CollectPageState extends State<CollectPage> {
 
   Widget _buildTimeRow() {
     return Padding(
-      padding: const EdgeInsets.only(left: 15, bottom: 15),
+      padding: const EdgeInsets.only(left: 15,right: 15, top: 0, bottom: 0),
       child: Text(
         '2023-10-11 14:30',
         style: TextStyle(

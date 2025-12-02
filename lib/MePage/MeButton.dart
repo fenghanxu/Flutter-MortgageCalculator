@@ -42,7 +42,6 @@ class MeButton extends StatelessWidget {
                   'assets/images/$imageName.png',
                   width: 18,
                   height: 18,
-                  color: Colors.black54,
                 ),
               ),
             ),
